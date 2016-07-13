@@ -103,5 +103,22 @@ namespace ToDoList
 
       Assert.Equal(testTaskList, resultTaskList);
     }
+    [Fact]
+    public void Test_Update_UpdatesCategoryInDatabase()
+    {
+      //Arrange
+      string name = "Home stuff";
+      Category testCategory = new Category(name);
+      testCategory.Save();
+      string newName = "Work stuff";
+
+      //Act
+      testCategory.Update(newName);
+
+      string result = testCategory.GetName();
+
+      //Assert
+      Assert.Equal(newName, result);
+    }
   }
 }

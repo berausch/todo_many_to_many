@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Word Count!</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  </head>
+  <body>
+    <h2>Here are all the tasks in this category:</h2>
+
+    @if (@Model["tasks"].Count == 0)
+    {
+    <p>No tasks have been added yet!</p>
+    }
+    else
+    {
+    <ol>
+    @foreach (var task in @Model["tasks"])
+    {
+      <li>@task.GetDescription()</li>
+      <li>@task.GetDueDate()</li>
+    }
+    </ol>
+    }
+    <p><a href="/tasks/new">Add a new task</a></p>
+    <p><a href="/">Return to Main Page</a></p>
+  </body>
+</html>
