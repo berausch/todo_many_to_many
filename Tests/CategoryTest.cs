@@ -91,10 +91,11 @@ namespace ToDoList
       Category testCategory = new Category("Household chores");
       testCategory.Save();
 
-      Task firstTask = new Task("Mow the lawn", testCategory.GetId());
+      Task firstTask = new Task("Mow the lawn", testCategory.GetId(), new DateTime(2016, 7, 16));
       firstTask.Save();
-      Task secondTask = new Task("Do the dishes", testCategory.GetId());
+      Task secondTask = new Task("Do the dishes", testCategory.GetId(), new DateTime(2016, 7, 16));
       secondTask.Save();
+      Console.WriteLine();
 
 
       List<Task> testTaskList = new List<Task> {firstTask, secondTask};
