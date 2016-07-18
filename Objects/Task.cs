@@ -181,7 +181,7 @@ namespace ToDoList
       SqlConnection conn = DB.Connection();
       conn.Open();
       SqlDataReader rdr = null;
-      SqlCommand cmd new SqlCommand ("SELECT category_id FROM categories_tasks WHERE task_id = @TaskId;", conn);
+      SqlCommand cmd = new SqlCommand ("SELECT category_id FROM categories_tasks WHERE task_id = @TaskId;", conn);
       SqlParameter taskIdParameter = new SqlParameter();
       taskIdParameter.ParameterName = "@TaskId";
       taskIdParameter.Value = this.GetId();
@@ -197,7 +197,7 @@ namespace ToDoList
       {
         rdr.Close();
       }
-      LIst<Category> categories = new List<Category> {};
+      List<Category> categories = new List<Category> {};
       foreach (int categoryId in categoryIds)
       {
         SqlDataReader queryReader = null;
@@ -224,6 +224,24 @@ namespace ToDoList
         conn.Close();
       }
       return categories;
+    }
+    public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM tasks WHERE id = @TaskId; DELETE FROM categories_tasks WHERE task_id = @TaskId;", conn);
+      SqlParameter taskIdParameter = new SqlParameter();
+      taskIdParameter.ParameterName = "@TaskId";
+      taskIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(taskIdParameter);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
     }
   }
 }

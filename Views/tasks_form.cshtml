@@ -11,12 +11,6 @@
       <input id="task-description" name="task-description" type="text">
       <label for="date">Due Date, yyyy/mm/dd:</label>
       <input id="date" name="date" type="date">
-      <select name="category-id">
-        @foreach (var category in Model)
-        {
-          <option value="@category.GetId()">@category.GetName()</option>
-        }
-      </select>
       <button type="submit">Add new task</button>
     </form>
     <p><a href="/">Back home</a></p>

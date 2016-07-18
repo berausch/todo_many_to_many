@@ -82,9 +82,9 @@ namespace ToDoList
 
     public void Dispose()
     {
-      Task.DeleteAll();
       Category.DeleteAll();
     }
+    
     [Fact]
     public void Test_Update_UpdatesCategoryInDatabase()
     {
@@ -157,6 +157,27 @@ namespace ToDoList
 
       //Assert
       Assert.Equal(testList, savedTasks);
+    }
+    [Fact]
+    public void Test_Delete_DeletesCategoryAssociationsFromDatabase()
+    {
+      //Arrange
+      Task testTask = new Task("Mow the lawn", new DateTime(2016, 7, 16));
+      testTask.Save();
+
+      string testName = "Home stuff";
+      Category testCategory = new Category(testName);
+      testCategory.Save();
+
+      //Act
+      testCategory.AddTask(testTask);
+      testCategory.Delete();
+
+      List<Category> resultTaskCategories = testTask.GetCategories();
+      List<Category> testTaskCategories = new List<Category> {};
+
+      //Assert
+      Assert.Equal(testTaskCategories, resultTaskCategories);
     }
   }
 }
