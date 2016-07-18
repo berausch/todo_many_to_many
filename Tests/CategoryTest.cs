@@ -127,9 +127,9 @@ namespace ToDoList
     {
       Category testCategory = new Category("Household chores");
       testCategory.Save();
-      Task testTask = new Task("Mow the lawn");
+      Task testTask = new Task("Mow the lawn",  new DateTime(2016, 7, 16));
       testTask.Save();
-      Task testTask2 = new Task("Water the garden");
+      Task testTask2 = new Task("Water the garden",  new DateTime(2016, 7, 16));
       testTask2.Save();
       testCategory.AddTask(testTask);
       testCategory.AddTask(testTask2);
@@ -140,15 +140,22 @@ namespace ToDoList
     [Fact]
     public void Test_GetTasks_ReturnsAllCategoryTasks()
     {
+      //Arrange
       Category testCategory = new Category("Household chores");
       testCategory.Save();
-      Task testTask1 = new Task("Mow the lawn");
+
+      Task testTask1 = new Task("Mow the lawn", new DateTime(2016, 7, 16));
       testTask1.Save();
-      Task testTask2 = new Task("Buy plane ticket");
+
+      Task testTask2 = new Task("Buy plane ticket", new DateTime(2016, 7, 16));
       testTask2.Save();
+
+      //Act
       testCategory.AddTask(testTask1);
       List<Task> savedTasks = testCategory.GetTasks();
       List<Task> testList = new List<Task> {testTask1};
+
+      //Assert
       Assert.Equal(testList, savedTasks);
     }
   }
